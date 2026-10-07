@@ -1,17 +1,32 @@
-import { useState } from 'react';
-import Header from './Header';
+import React from 'react';
+import Header from './components/Header';
+import TaskList from './components/TaskList';
+import TaskSummary from './components/TaskSummary';
 
 function App() {
-  const [count, setCount] = useState(0);
+  // נתונים סטטיים בלבד (ללא שינוי כרגע)
+  const username = "ישראל ישראלי";
+  
+  const tasks = [
+    { id: 1, name: 'לימוד דף יומי', status: 'הושלם' },
+    { id: 2, name: 'תפילת שחרית במניין', status: 'הושלם' },
+    { id: 3, name: 'קריאת שמע שעל המיטה', status: 'טרם הושלם' }
+  ];
+
+  // חישוב סטטי של כמות המשימות והמושלמות לצורך העברה לסיכום
+  const totalTasks = tasks.length;
+  const completedTasks = tasks.filter(task => task.status === 'הושלם').length;
 
   return (
-    <div style={{ textAlign: 'center' }}>
-      <Header />
-      <h1>האפליקציה הראשונה שלי בריאקט</h1>
-      <p>לחצת על הכפתור {count} פעמים</p>
-      <button onClick={() => setCount(count + 1)}>
-        לחצי כדי להוסיף 1
-      </button>
+    <div>
+      {/* 1. קומפוננטת כותרת */}
+      <Header username={username} />
+
+      {/* 2. קומפוננטת רשימת משימות */}
+      <TaskList tasks={tasks} />
+
+      {/* 3. קומפוננטת סיכום */}
+      <TaskSummary totalTasks={totalTasks} completedTasks={completedTasks} />
     </div>
   );
 }
