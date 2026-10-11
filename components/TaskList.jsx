@@ -7,6 +7,12 @@ function TaskList(props) {
       <ul>
         {props.tasks.map((task) => (
           <li key={task.id}>
+            <input
+              type="checkbox"
+              checked={task.status === 'הושלם'}
+              onChange={() => props.onToggleTask(task.id)}
+              aria-label={`סימון ${task.name} כהושלמה`}
+            />{' '}
             <span>{task.name}</span> - <strong>{task.status}</strong>
           </li>
         ))}
